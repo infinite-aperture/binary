@@ -14,35 +14,48 @@ const Styles = () => (
   body{margin:0;background:radial-gradient(1200px 600px at 10% -20%, #1b2552 0, transparent 60%),
                 radial-gradient(1000px 500px at 110% -40%, #0b8373 0, transparent 55%), var(--bg);
        color:var(--text); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;}
+  @media(max-width:768px){
+    body{background:radial-gradient(800px 400px at 10% -20%, #1b2552 0, transparent 60%),
+                radial-gradient(600px 300px at 110% -40%, #0b8373 0, transparent 55%), var(--bg);}
+  }
   a{color:inherit; text-decoration:none}
   button{font:inherit}
 
   .container{max-width:1100px;margin:0 auto;padding:24px}
+  @media(max-width:768px){ .container{padding:16px} }
   .glow{position:fixed;inset:auto -20% 0 -20%;height:180px;filter:blur(60px);
         background:linear-gradient(90deg, #6ea8fe33, #6ef3ff33, #58e38333); pointer-events:none; z-index:-1}
 
   /* Buttons, badges, cards */
   .btn{background:#22315c;border:1px solid var(--border);color:#dfe8ff;padding:10px 14px;border-radius:12px;
-       cursor:pointer;transition:.15s; font-weight:700; display:inline-flex; align-items:center; gap:8px}
+       cursor:pointer;transition:.15s; font-weight:700; display:inline-flex; align-items:center; gap:8px;
+       min-height:44px; touch-action:manipulation}
   .btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,0,0,.3)}
   .btn.ghost{background:transparent}
   .btn.ok{background:#1f3f2d;border-color:#2e6c4f}
+  @media(max-width:768px){ 
+    .btn{padding:12px 16px; min-height:48px; font-size:16px}
+    .btn:active{transform:scale(0.98)}
+  }
   .badge{display:inline-flex;align-items:center;gap:6px; padding:4px 8px;border-radius:999px;
          border:1px solid var(--border); background:#1a2448; font-size:12px; color:#dbe6ff}
   .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
 
   .card{background:linear-gradient(180deg, var(--panel), var(--panel-2)); border:1px solid var(--border);
         border-radius:16px; padding:16px; box-shadow:0 10px 30px rgba(0,0,0,.25); margin-bottom:16px}
+  @media(max-width:768px){ .card{padding:12px; border-radius:12px; margin-bottom:12px} }
 
   /* Progress */
   .progress{height:10px;background:#162044;border:1px solid var(--border);border-radius:999px;overflow:hidden}
   .progress>div{height:100%;background:linear-gradient(90deg,var(--brand),var(--brand-2));}
   .sep{width:1px;background:#243055; align-self:stretch}
   .muted{color:var(--muted);font-size:14px}
+  @media(max-width:768px){ .muted{font-size:13px} }
 
   /* Tabs (trainer) – bessere Lesbarkeit */
   .tabs{background:#0f1a39; border:1px solid var(--border); padding:6px;border-radius:12px; display:flex; gap:8px; flex-wrap:wrap}
-  .tab{padding:10px 14px;border-radius:10px; cursor:pointer; font-weight:700; color:#dfe8ff; border:1px solid transparent; opacity:1}
+  .tab{padding:10px 14px;border-radius:10px; cursor:pointer; font-weight:700; color:#dfe8ff; border:1px solid transparent; opacity:1;
+       min-height:44px; touch-action:manipulation}
   .tab.active{
     background:linear-gradient(180deg,#21346b,#203061);
     border-color:#3856a6;
@@ -50,6 +63,11 @@ const Styles = () => (
   }
   .tab:not(.active){ background:#111a36; color:#cfe0ff; border-color:#1b2750; opacity:.92 }
   .tab:hover{ filter:brightness(1.08) }
+  @media(max-width:768px){ 
+    .tabs{padding:4px; gap:4px}
+    .tab{padding:8px 10px; font-size:14px; min-height:40px}
+    .tab:active{transform:scale(0.98)}
+  }
 
   /* Inputs/tables */
   .row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
@@ -60,8 +78,26 @@ const Styles = () => (
   .table{width:100%;border-collapse:collapse}
   .table th,.table td{border-bottom:1px solid #243055;padding:8px 6px;text-align:left}
   .label{font-size:12px;color:var(--muted)}
+  .stat{display:flex; flex-direction:column; gap:4px; padding:8px; background:#0f172e; border-radius:8px; border:1px solid var(--border)}
+  .stat .label{font-size:11px; color:var(--muted)}
+  .stat .value{font-size:14px; font-weight:700}
+  @media(max-width:768px){ 
+    .stat{padding:6px; gap:2px}
+    .stat .label{font-size:10px}
+    .stat .value{font-size:12px}
+  }
   .grid{display:grid;gap:14px}
   @media(min-width:880px){ .grid-2{grid-template-columns:1fr 1fr} }
+  @media(max-width:768px){ 
+    .row{gap:8px}
+    .input, .num, .range{padding:12px; font-size:16px; min-height:44px}
+    .num{width:80px}
+    .range{width:200px; height:12px}
+    .table{font-size:14px}
+    .table th,.table td{padding:6px 4px}
+    .grid{gap:10px}
+    .grid-2{grid-template-columns:1fr}
+  }
 
   /* ---------- Landing page (DE) ---------- */
   .hero{padding:54px 0 24px; text-align:center}
@@ -72,10 +108,22 @@ const Styles = () => (
 
   .projects{display:grid; gap:18px; margin-top:28px}
   @media(min-width:820px){ .projects{grid-template-columns: repeat(3, 1fr)} }
+  @media(max-width:768px){ 
+    .hero{padding:32px 0 16px}
+    .hero h1{font-size:28px}
+    .hero p{font-size:16px}
+    .cta-row{gap:8px; flex-direction:column; align-items:center}
+    .projects{gap:12px; margin-top:20px}
+  }
   .p-card{position:relative; border-radius:18px; padding:18px; border:1px solid #233056;
           background:linear-gradient(180deg,#0f1730,#0d142a);
-          box-shadow:0 12px 28px rgba(0,0,0,.28); overflow:hidden; min-height:160px}
-  .p-card:hover{transform:translateY(-2px); transition:.18s ease; box-shadow:0 18px 40px rgba(0,0,0,.35)}
+          box-shadow:0 12px 28px rgba(0,0,0,.28); overflow:hidden; min-height:160px;
+          cursor:pointer; transition:.18s ease}
+  .p-card:hover{transform:translateY(-2px); box-shadow:0 18px 40px rgba(0,0,0,.35)}
+  @media(max-width:768px){ 
+    .p-card{padding:14px; border-radius:14px; min-height:140px}
+    .p-card:active{transform:scale(0.98)}
+  }
   .p-eyebrow{font-size:12px; color:#8fb0ff; letter-spacing:.08em; text-transform:uppercase}
   .p-title{font-size:18px; font-weight:800; margin:6px 0 4px}
   .p-desc{font-size:14px; color:#cfe0ff}
@@ -96,11 +144,17 @@ const Styles = () => (
                   box-shadow:0 0 0 2px #0f172e, 0 0 0 4px rgba(255,255,255,.06); }
   .ruler .marker.target{ background:linear-gradient(180deg,#6ea8fe,#6ef3ff); }
   .ruler .marker.current{ background:#58e383; }
+  @media(max-width:768px){ 
+    .target-card{padding:12px}
+    .goal-value{font-size:28px}
+    .goal-sub{font-size:11px}
+  }
 
   /* Bits klar machen */
   .bit-grid{ display:grid; grid-template-columns:repeat(8, minmax(64px,1fr)); gap:14px }
   .bit-head{ text-align:center; font-size:11px; color:#a9b4d6 }
-  .bit-chip{ padding:10px 8px; border-radius:10px; border:1px solid var(--border); cursor:pointer; font-weight:700; text-align:center }
+  .bit-chip{ padding:10px 8px; border-radius:10px; border:1px solid var(--border); cursor:pointer; font-weight:700; text-align:center;
+             min-height:44px; touch-action:manipulation; transition:.15s }
   .bit-chip.off{ background:#141e3e; color:#9fb4ff }
   .bit-chip.on{ background:#203061; color:#e8f0ff; border-color:#3856a6; box-shadow:0 8px 20px rgba(56,86,166,.25) }
   .bit-chip .w{ font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:14px; line-height:1.1 }
@@ -110,6 +164,15 @@ const Styles = () => (
   .bin-bit{ width:22px; height:22px; border-radius:6px; border:1px solid var(--border);
             display:flex; align-items:center; justify-content:center; font-weight:700 }
   .bin-bit.on{ background:#203061 }
+  @media(max-width:768px){ 
+    .bit-grid{ grid-template-columns:repeat(4, 1fr); gap:8px }
+    .bit-chip{ padding:12px 8px; min-height:48px }
+    .bit-chip .w{ font-size:16px }
+    .bit-chip .p{ font-size:10px }
+    .bit-chip:active{ transform:scale(0.95) }
+    .bin-ribbon{ gap:4px; margin-top:8px }
+    .bin-bit{ width:20px; height:20px; font-size:12px }
+  }
 `}</style>
 );
 
@@ -219,9 +282,9 @@ function BitFlipper({onSuccess}:{onSuccess:(xp:number)=>void}){
   return (
     <Card title="Bit-Flipper (Dezimal ↔ Bits)"
           right={<span className="badge">Score <span className="mono">{score}</span> · Streak <span className="mono">{streak}</span></span>}>
-      <div className="row" style={{alignItems:"stretch"}}>
+      <div className="grid grid-2" style={{alignItems:"stretch"}}>
         {/* Zielpanel */}
-        <div style={{minWidth:260, maxWidth:320}}>
+        <div>
           <div className="target-card">
             <div className="goal-title">Ziel</div>
             <div className="goal-value mono">{target}</div>
@@ -241,10 +304,8 @@ function BitFlipper({onSuccess}:{onSuccess:(xp:number)=>void}){
           </div>
         </div>
 
-        <div className="sep" />
-
         {/* Bit-Grid */}
-        <div style={{flex:1}}>
+        <div>
           <div className="bit-grid" aria-hidden>
             {Array.from({length:8}, (_,i)=>(
               <div key={`head-${i}`} className="bit-head">Bit {i} {i===0?"(MSB)": i===7?"(LSB)":""}</div>
@@ -401,7 +462,7 @@ function IPv4Challenge({onSuccess}:{onSuccess:(xp:number)=>void}){
         </div>
       </div>
 
-      <div className="row" style={{marginTop:10}}>
+      <div className="grid grid-2" style={{marginTop:10}}>
         <Stat label="Maske" value={cidrToMask(cidr).join(".")} />
         <Stat label="Wildcard" value={maskToWildcard(mask).join(".")} />
         <Stat label="Hosts" value={usable} />
@@ -452,7 +513,7 @@ function CidrSplit(){
         <span className="muted">Benötigte Bits: <span className="mono">{neededBits}</span></span>
         <span className="muted">Neues CIDR: <span className="badge mono">/{newCidr}</span></span>
       </div>
-      <div style={{overflow:"auto"}}>
+      <div style={{overflow:"auto", WebkitOverflowScrolling:"touch"}}>
         <table className="table mono">
           <thead><tr><th>#</th><th>Netz</th><th>Broadcast</th><th>Erste</th><th>Letzte</th></tr></thead>
           <tbody>
