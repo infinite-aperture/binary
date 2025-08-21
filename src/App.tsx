@@ -14,53 +14,102 @@ const Styles = () => (
   body{margin:0;background:radial-gradient(1200px 600px at 10% -20%, #1b2552 0, transparent 60%),
                 radial-gradient(1000px 500px at 110% -40%, #0b8373 0, transparent 55%), var(--bg);
        color:var(--text); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;}
+  a{color:inherit; text-decoration:none}
+  button{font:inherit}
+
   .container{max-width:1100px;margin:0 auto;padding:24px}
-  .header{position:relative;margin-bottom:18px}
-  .glow{position:absolute;inset:auto -20% -40px -20%;height:160px;filter:blur(60px);
-        background:linear-gradient(90deg, #6ea8fe33, #6ef3ff33, #58e38333);}
-  h1{margin:0;font-weight:700;letter-spacing:.2px}
-  .muted{color:var(--muted);font-size:14px}
+  .glow{position:fixed;inset:auto -20% 0 -20%;height:180px;filter:blur(60px);
+        background:linear-gradient(90deg, #6ea8fe33, #6ef3ff33, #58e38333); pointer-events:none; z-index:-1}
 
-  .row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-  .spacer{flex:1}
-
-  .card{background:linear-gradient(180deg, var(--panel), var(--panel-2)); border:1px solid var(--border);
-        border-radius:16px; padding:16px; box-shadow:0 10px 30px rgba(0,0,0,.25); margin-bottom:16px}
-  .card h3{margin:0 0 8px 0;font-size:16px}
-  .grid{display:grid;gap:14px}
-  @media(min-width:880px){ .grid-2{grid-template-columns:1fr 1fr} }
-
-  .btn{background:#22315c;border:1px solid var(--border);color:#dfe8ff;padding:8px 12px;border-radius:10px;
-       cursor:pointer;transition:.15s; font-weight:600}
+  /* Buttons, badges, cards */
+  .btn{background:#22315c;border:1px solid var(--border);color:#dfe8ff;padding:10px 14px;border-radius:12px;
+       cursor:pointer;transition:.15s; font-weight:700; display:inline-flex; align-items:center; gap:8px}
   .btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,0,0,.3)}
-  .btn.secondary{background:#172349}
   .btn.ghost{background:transparent}
   .btn.ok{background:#1f3f2d;border-color:#2e6c4f}
-  .btn.warn{background:#3f341f;border-color:#6c5a2e}
-  .btn.err{background:#3f1f1f;border-color:#6c2e2e}
-
   .badge{display:inline-flex;align-items:center;gap:6px; padding:4px 8px;border-radius:999px;
          border:1px solid var(--border); background:#1a2448; font-size:12px; color:#dbe6ff}
   .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
 
+  .card{background:linear-gradient(180deg, var(--panel), var(--panel-2)); border:1px solid var(--border);
+        border-radius:16px; padding:16px; box-shadow:0 10px 30px rgba(0,0,0,.25); margin-bottom:16px}
+
+  /* Progress */
   .progress{height:10px;background:#162044;border:1px solid var(--border);border-radius:999px;overflow:hidden}
   .progress>div{height:100%;background:linear-gradient(90deg,var(--brand),var(--brand-2));}
+  .sep{width:1px;background:#243055; align-self:stretch}
+  .muted{color:var(--muted);font-size:14px}
 
-  .tabs{background:#111a36; border:1px solid var(--border); padding:4px;border-radius:12px; display:flex; gap:6px; flex-wrap:wrap}
-  .tab{padding:8px 12px;border-radius:8px; cursor:pointer; font-weight:600; color:#cfe0ff; border:1px solid transparent}
-  .tab.active{background:#203061; border-color:var(--border)}
-  .tab:hover{filter:brightness(1.1)}
+  /* Tabs (trainer) – bessere Lesbarkeit */
+  .tabs{background:#0f1a39; border:1px solid var(--border); padding:6px;border-radius:12px; display:flex; gap:8px; flex-wrap:wrap}
+  .tab{padding:10px 14px;border-radius:10px; cursor:pointer; font-weight:700; color:#dfe8ff; border:1px solid transparent; opacity:1}
+  .tab.active{
+    background:linear-gradient(180deg,#21346b,#203061);
+    border-color:#3856a6;
+    box-shadow:0 10px 26px rgba(56,86,166,.25), inset 0 0 0 1px rgba(255,255,255,.05);
+  }
+  .tab:not(.active){ background:#111a36; color:#cfe0ff; border-color:#1b2750; opacity:.92 }
+  .tab:hover{ filter:brightness(1.08) }
 
-  .stat{display:flex;flex-direction:column;gap:2px}
-  .label{font-size:12px;color:var(--muted)}
-  .value{font-size:14px}
-
+  /* Inputs/tables */
+  .row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  .spacer{flex:1}
   .input, .num, .range{background:#0f172e;color:#eaf2ff;border:1px solid var(--border);border-radius:10px;padding:8px 10px}
+  .num{width:100px}
   .range{height:8px;width:240px}
   .table{width:100%;border-collapse:collapse}
   .table th,.table td{border-bottom:1px solid #243055;padding:8px 6px;text-align:left}
-  .sep{width:1px;background:#243055; align-self:stretch}
-  .hint{font-size:13px;color:#cfe0ff; background:#11204a;border:1px solid #2b3c73;padding:8px;border-radius:10px}
+  .label{font-size:12px;color:var(--muted)}
+  .grid{display:grid;gap:14px}
+  @media(min-width:880px){ .grid-2{grid-template-columns:1fr 1fr} }
+
+  /* ---------- Landing page (DE) ---------- */
+  .hero{padding:54px 0 24px; text-align:center}
+  .brand-kicker{font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:#8fb0ff}
+  .hero h1{font-size:40px; margin:10px 0 8px}
+  .hero p{max-width:760px;margin:0 auto; color:#bcd0ff}
+  .cta-row{display:flex; gap:12px; justify-content:center; margin-top:18px; flex-wrap:wrap}
+
+  .projects{display:grid; gap:18px; margin-top:28px}
+  @media(min-width:820px){ .projects{grid-template-columns: repeat(3, 1fr)} }
+  .p-card{position:relative; border-radius:18px; padding:18px; border:1px solid #233056;
+          background:linear-gradient(180deg,#0f1730,#0d142a);
+          box-shadow:0 12px 28px rgba(0,0,0,.28); overflow:hidden; min-height:160px}
+  .p-card:hover{transform:translateY(-2px); transition:.18s ease; box-shadow:0 18px 40px rgba(0,0,0,.35)}
+  .p-eyebrow{font-size:12px; color:#8fb0ff; letter-spacing:.08em; text-transform:uppercase}
+  .p-title{font-size:18px; font-weight:800; margin:6px 0 4px}
+  .p-desc{font-size:14px; color:#cfe0ff}
+  .p-footer{display:flex; align-items:center; gap:10px; margin-top:12px}
+
+  .blur-accent{position:absolute; width:220px; height:220px; filter:blur(60px); opacity:.45; border-radius:50%}
+  .accent-blue{background:#2463ff44; top:-40px; right:-40px}
+  .accent-green{background:#1fe39a33; bottom:-40px; left:-40px}
+
+  /* ---------- Bit-Flipper visuals (für Erkennbarkeit) ---------- */
+  .target-card{position:relative; padding:14px 16px; border-radius:14px;
+    background:linear-gradient(180deg,#1b2a58,#11214a); border:1px solid #2b3c73; box-shadow:0 12px 28px rgba(0,0,0,.25)}
+  .goal-title{font-size:12px; letter-spacing:.08em; color:#a9b4d6; text-transform:uppercase}
+  .goal-value{font-size:32px; font-weight:800; line-height:1}
+  .goal-sub{font-size:12px; color:#cfe0ff; opacity:.9}
+  .ruler{ position:relative; height:10px; border-radius:999px; background:#162044; border:1px solid var(--border); margin-top:8px; }
+  .ruler .marker{ position:absolute; top:50%; width:10px; height:10px; border-radius:50%; transform:translate(-50%,-50%);
+                  box-shadow:0 0 0 2px #0f172e, 0 0 0 4px rgba(255,255,255,.06); }
+  .ruler .marker.target{ background:linear-gradient(180deg,#6ea8fe,#6ef3ff); }
+  .ruler .marker.current{ background:#58e383; }
+
+  /* Bits klar machen */
+  .bit-grid{ display:grid; grid-template-columns:repeat(8, minmax(64px,1fr)); gap:14px }
+  .bit-head{ text-align:center; font-size:11px; color:#a9b4d6 }
+  .bit-chip{ padding:10px 8px; border-radius:10px; border:1px solid var(--border); cursor:pointer; font-weight:700; text-align:center }
+  .bit-chip.off{ background:#141e3e; color:#9fb4ff }
+  .bit-chip.on{ background:#203061; color:#e8f0ff; border-color:#3856a6; box-shadow:0 8px 20px rgba(56,86,166,.25) }
+  .bit-chip .w{ font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:14px; line-height:1.1 }
+  .bit-chip .p{ font-size:11px; opacity:.8 }
+  .bit-chip.target-outline{ outline:2px dashed #6ea8fe; outline-offset:2px }
+  .bin-ribbon{ display:flex; gap:6px; justify-content:center; margin-top:10px }
+  .bin-bit{ width:22px; height:22px; border-radius:6px; border:1px solid var(--border);
+            display:flex; align-items:center; justify-content:center; font-weight:700 }
+  .bin-bit.on{ background:#203061 }
 `}</style>
 );
 
@@ -76,27 +125,14 @@ function ipToOctets(ip:string): number[] | null {
   return parts;
 }
 const octetsToIp = (o:number[]) => o.join(".");
-function cidrToMask(cidr:number){
-  const bits = Array(32).fill(0).map((_,i)=> i<cidr?1:0);
-  return [0,1,2,3].map(o=> fromBinary(bits.slice(o*8,o*8+8).join("")));
-}
+function cidrToMask(cidr:number){ const bits = Array(32).fill(0).map((_,i)=> i<cidr?1:0); return [0,1,2,3].map(o=> fromBinary(bits.slice(o*8,o*8+8).join(""))); }
 const maskToWildcard = (m:number[]) => m.map(o=>255-o);
 const networkAddress = (ip:number[], mask:number[]) => ip.map((o,i)=> o & mask[i]);
 const broadcastAddress = (ip:number[], mask:number[]) => ip.map((o,i)=> (o & mask[i]) | (255 ^ mask[i]));
-function usableHosts(cidr:number){
-  const hostBits = 32 - cidr;
-  if (cidr===31) return 2;
-  if (cidr===32) return 1;
-  return Math.max(0, 2**hostBits - 2);
-}
-function randomPrivateIPv4(){
-  const r = randInt(1,3);
-  if (r===1) return `10.${randInt(0,255)}.${randInt(0,255)}.${randInt(0,255)}`;
-  if (r===2) return `172.${randInt(16,31)}.${randInt(0,255)}.${randInt(0,255)}`;
-  return `192.168.${randInt(0,255)}.${randInt(1,254)}`;
-}
+function usableHosts(cidr:number){ const hostBits = 32 - cidr; if (cidr===31) return 2; if (cidr===32) return 1; return Math.max(0, 2**hostBits - 2); }
+function randomPrivateIPv4(){ const r = randInt(1,3); if (r===1) return `10.${randInt(0,255)}.${randInt(0,255)}.${randInt(0,255)}`; if (r===2) return `172.${randInt(16,31)}.${randInt(0,255)}.${randInt(0,255)}`; return `192.168.${randInt(0,255)}.${randInt(1,254)}`; }
 
-/** ========== Micro‑audio (optional) ========== */
+/** ========== Micro-audio (optional) ========== */
 function useBeep(enabled:boolean){
   const beep = useCallback((freq=880, duration=0.06)=>{
     if(!enabled) return;
@@ -112,7 +148,7 @@ function useBeep(enabled:boolean){
   return beep;
 }
 
-/** ========== Components ========== */
+/** ========== Reusable bits ========== */
 const Stat = ({label, value}:{label:string; value:string|number}) => (
   <div className="stat">
     <div className="label">{label}</div>
@@ -131,24 +167,30 @@ const Card: React.FC<{title?:string; right?:React.ReactNode; children:React.Reac
   </div>
 );
 
-const Progress = ({value}:{value:number}) => (
-  <div className="progress"><div style={{width:`${clamp(value,0,100)}%`}}/></div>
-);
+const Progress = ({value}:{value:number}) => (<div className="progress"><div style={{width:`${clamp(value,0,100)}%`}}/></div>);
 
-/** ========== Game 1: Bit‑Flipper ========== */
+/** ========== Game 1: Bit-Flipper (klarer Bits) ========== */
 function BitFlipper({onSuccess}:{onSuccess:(xp:number)=>void}){
   const [target, setTarget] = useState(randInt(0,255));
-  const [bits, setBits] = useState<number[]>(Array(8).fill(0));
+  const [bits, setBits] = useState<number[]>(Array(8).fill(0)); // [b7..b0]
   const [score, setScore] = useState(0);
   const [streak, setStreak] = useState(0);
+  const [showTarget, setShowTarget] = useState(false);
 
+  const weights = [128,64,32,16,8,4,2,1];
   const value = useMemo(()=> fromBinary(bits.join("")), [bits]);
+  const targetBin = toBinary(target).split("").map(n=>Number(n)); // [b7..b0]
+
+  const currentDecomp = useMemo(()=>{
+    const parts = weights.filter((_,i)=> bits[i]===1);
+    return parts.length ? `${value} = ${parts.join(" + ")}` : `${value}`;
+  }, [bits, value]);
 
   useEffect(()=>{
     const onKey=(e:KeyboardEvent)=>{
       const idx = parseInt(e.key,10);
       if(!Number.isNaN(idx) && idx>=1 && idx<=8){
-        const i = 8-idx; // 1->LSB
+        const i = 8-idx; // 1 toggelt LSB
         setBits(prev => prev.map((b,k)=> k===i ? (b?0:1) : b));
       }
       if (e.key==="Enter") submit();
@@ -164,50 +206,93 @@ function BitFlipper({onSuccess}:{onSuccess:(xp:number)=>void}){
       setScore(s=>s+10+streak);
       setStreak(s=>s+1);
       onSuccess(15+streak);
-      confetti({ particleCount: 70, spread: 70, origin: { y: .4 } });
+      confetti({ particleCount: 90, spread: 75, origin: { y: .4 } });
       reset();
     } else {
       setStreak(0);
     }
   }
 
+  const currentPct = Math.round((value/255)*100);
+  const targetPct  = Math.round((target/255)*100);
+
   return (
-    <Card title="Bit‑Flipper (Dezimal ↔ Bits)" right={<span className="badge">Ziel: <span className="mono">{target}</span></span>}>
-      <div className="row" style={{alignItems:"flex-start"}}>
+    <Card title="Bit-Flipper (Dezimal ↔ Bits)"
+          right={<span className="badge">Score <span className="mono">{score}</span> · Streak <span className="mono">{streak}</span></span>}>
+      <div className="row" style={{alignItems:"stretch"}}>
+        {/* Zielpanel */}
+        <div style={{minWidth:260, maxWidth:320}}>
+          <div className="target-card">
+            <div className="goal-title">Ziel</div>
+            <div className="goal-value mono">{target}</div>
+            <div className="goal-sub">Erreiche diesen Wert durch Setzen der Bit-Gewichte</div>
+
+            <div className="ruler">
+              <div className="marker target" style={{left:`${targetPct}%`}}/>
+              <div className="marker current" style={{left:`${currentPct}%`}}/>
+            </div>
+
+            <div className="row" style={{marginTop:10}}>
+              <span className="muted">Formel: Wert = Σ(Bit × 2ⁿ)</span>
+              <button className="btn ghost" onClick={()=>setShowTarget(s=>!s)}>
+                {showTarget? "Ziel-Bits ausblenden":"Ziel-Bits anzeigen"}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div className="sep" />
+
+        {/* Bit-Grid */}
         <div style={{flex:1}}>
-          <div className="grid" style={{gridTemplateColumns:"repeat(8, minmax(64px,1fr))"}}>
+          <div className="bit-grid" aria-hidden>
+            {Array.from({length:8}, (_,i)=>(
+              <div key={`head-${i}`} className="bit-head">Bit {i} {i===0?"(MSB)": i===7?"(LSB)":""}</div>
+            ))}
+          </div>
+
+          <div className="bit-grid" style={{marginTop:6}}>
             {bits.map((b,i)=>(
-              <button key={i} className={`btn ${b? "ok": "secondary"}`} title={`Bit ${i} – Wert ${2**(7-i)}`} onClick={()=>toggle(i)}>
-                <span className="mono">{2**(7-i)}</span>
+              <button
+                key={i}
+                className={`bit-chip ${b? 'on':'off'} ${showTarget && targetBin[i] ? 'target-outline':''}`}
+                title={`Bit ${i} · Gewicht ${weights[i]} · 2^${7-i}`}
+                onClick={()=>toggle(i)}
+              >
+                <div className="w">{weights[i]}</div>
+                <div className="p">2^{7-i}</div>
               </button>
             ))}
           </div>
-          <div style={{marginTop:10}} className="mono">Aktuell: {value} (bin: {bits.join("")})</div>
+
+          <div className="bin-ribbon">
+            {bits.map((b,i)=>(
+              <div key={`r-${i}`} className={`bin-bit ${b?'on':''}`}>{b}</div>
+            ))}
+          </div>
+
+          <div style={{marginTop:10}} className="mono">
+            Aktuell: {currentDecomp} &nbsp;&nbsp; (bin: {bits.join("")})
+          </div>
+
           <div className="row" style={{marginTop:10}}>
-            <button className="btn ok" onClick={submit}>Prüfen</button>
+            <button className="btn ok" onClick={submit}>Prüfen (Enter)</button>
             <button className="btn ghost" onClick={reset}>Neu</button>
           </div>
-        </div>
-        <div className="sep" />
-        <div style={{display:"grid", gap:8, minWidth:180}}>
-          <div><span className="badge">Score</span> <span className="mono">{score}</span></div>
-          <div><span className="badge">Streak</span> <span className="mono">{streak}</span></div>
-          <div className="hint">Tipp: Tasten <span className="mono">1–8</span> toggeln Bits; <span className="mono">Enter</span> prüft.</div>
         </div>
       </div>
     </Card>
   );
 }
 
-/** ========== Game 2: Subnet‑Maske bauen ========== */
+/** ========== Game 2: Subnet-Maske bauen ========== */
 function SubnetMaskBuilder(){
   const [cidr, setCidr] = useState(24);
   const mask = useMemo(()=> cidrToMask(cidr), [cidr]);
   const maskBin = mask.map(o=>toBinary(o)).join(" ");
   const wildcard = maskToWildcard(mask);
-
   return (
-    <Card title="Subnet‑Maske bauen (CIDR → Maske)">
+    <Card title="Subnet-Maske bauen (CIDR → Maske)">
       <div className="row">
         <span className="muted">/CIDR</span>
         <input className="range" type="range" min={0} max={32} step={1} value={cidr} onChange={e=>setCidr(e.target.valueAsNumber)} />
@@ -216,9 +301,9 @@ function SubnetMaskBuilder(){
       </div>
       <div className="grid grid-2" style={{marginTop:12}}>
         <Card><h3>Maske</h3><div className="mono" style={{fontSize:18}}>{mask.join(".")}</div><div className="mono muted" style={{fontSize:12}}>{maskBin}</div></Card>
-        <Card><h3>Wildcard</h3><div className="mono" style={{fontSize:18}}>{wildcard.join(".")}</div><div className="muted" style={{fontSize:12}}>(255 - Maske)</div></Card>
+        <Card><h3>Wildcard</h3><div className="mono" style={{fontSize:18}}>{wildcard.join(".")}</div><div className="muted" style={{fontSize:12}}>(255 − Maske)</div></Card>
       </div>
-      <div className="muted" style={{marginTop:8}}>Host‑Adressen: <span className="mono">{usableHosts(cidr)}</span></div>
+      <div className="muted" style={{marginTop:8}}>Host-Adressen: <span className="mono">{usableHosts(cidr)}</span></div>
     </Card>
   );
 }
@@ -291,7 +376,7 @@ function IPv4Challenge({onSuccess}:{onSuccess:(xp:number)=>void}){
         <span className="muted">IP</span>
         <input className="input" style={{width:170}} value={ip} onChange={e=>setIp(e.target.value)} />
         <span className="muted">/CIDR</span>
-        <input className="num" style={{width:90}} type="number" min={0} max={32}
+        <input className="num" type="number" min={0} max={32}
                value={cidr} onChange={e=>setCidr(clamp(Number(e.target.value),0,32))}/>
         <button className="btn" onClick={()=>setFeedback("Tipp: Netz = IP AND Maske; Broadcast = Netz OR (NOT Maske). Erste/Letzte = ±1 (außer /31,/32).")}>Tipp</button>
         <button className="btn ghost" onClick={reveal}>Lösung</button>
@@ -332,7 +417,7 @@ function IPv4Challenge({onSuccess}:{onSuccess:(xp:number)=>void}){
   );
 }
 
-/** ========== Game 4: CIDR‑Split ========== */
+/** ========== Game 4: CIDR-Split ========== */
 function CidrSplit(){
   const [baseCidr] = useState(24);
   const [baseNet] = useState("192.168.10.0");
@@ -357,13 +442,13 @@ function CidrSplit(){
   const rows = Array.from({length: subnets}, (_,i)=> ({i, ...calcSubnet(i)}));
 
   return (
-    <Card title="CIDR‑Split (gleich große Subnetze)">
+    <Card title="CIDR-Split (gleich große Subnetze)">
       <div className="row" style={{marginBottom:8}}>
         <span className="muted">Ausgangsnetz</span>
         <span className="badge mono">{baseNet}/{baseCidr}</span>
         <span className="muted">Anzahl Subnetze</span>
         <input className="num" type="number" min={1} max={64} value={subnets}
-               onChange={e=>setSubnets(clamp(e.target.valueAsNumber || 1, 1, 64))} style={{width:100}}/>
+               onChange={e=>setSubnets(clamp(e.target.valueAsNumber || 1, 1, 64))}/>
         <span className="muted">Benötigte Bits: <span className="mono">{neededBits}</span></span>
         <span className="muted">Neues CIDR: <span className="badge mono">/{newCidr}</span></span>
       </div>
@@ -387,8 +472,8 @@ function CidrSplit(){
   );
 }
 
-/** ========== Main App ========== */
-export default function App(){
+/** ========== Trainer Shell ========== */
+function TrainerApp(){
   const [tab, setTab] = useState<"flip"|"mask"|"challenge"|"split">("flip");
   const [timer, setTimer] = useState(0);
   const [running, setRunning] = useState(false);
@@ -418,42 +503,123 @@ export default function App(){
   function resetTimer(){ setTimer(0); }
 
   return (
+    <div className="container">
+      <div style={{marginBottom:18}}>
+        <h1 style={{margin:0}}>Binary & Subnet Trainer</h1>
+        <div className="muted">Spielerisch Bits, CIDR und Subnetting lernen – perfekt für IHK/AP1.</div>
+      </div>
+
+      <div className="row" style={{marginBottom:12}}>
+        <span className="badge">Lvl <span className="mono">{level}</span></span>
+        <div style={{width:260}}><Progress value={progress}/></div>
+        <span className="muted mono">{xp}/{levelCap} XP</span>
+        <div className="spacer"/>
+        <button className={`btn ${running? 'err':'ok'}`} onClick={()=>setRunning(r=>!r)}>{running? 'Stopp':'Timer'}</button>
+        <button className="btn ghost" onClick={resetTimer}>Reset</button>
+        <span className="badge mono">{Math.floor(timer/60)}:{String(timer%60).padStart(2,'0')}</span>
+        <button className="btn ghost" title="Sound an/aus" onClick={()=>setSound(s=>!s)}>{sound? '🔊':'🔈'}</button>
+      </div>
+
+      <div className="tabs" role="tablist" aria-label="Trainer Tabs">
+        <button className={`tab ${tab==='flip'?'active':''}`} onClick={()=>setTab('flip')}>🕹️ Bit-Flipper</button>
+        <button className={`tab ${tab==='mask'?'active':''}`} onClick={()=>setTab('mask')}>🎭 Maske</button>
+        <button className={`tab ${tab==='challenge'?'active':''}`} onClick={()=>setTab('challenge')}>🌐 IPv4 Challenge</button>
+        <button className={`tab ${tab==='split'?'active':''}`} onClick={()=>setTab('split')}>✂️ CIDR-Split</button>
+      </div>
+
+      {tab==='flip' && <div style={{marginTop:14}}><BitFlipper onSuccess={reward}/></div>}
+      {tab==='mask' && <div style={{marginTop:14}}><SubnetMaskBuilder/></div>}
+      {tab==='challenge' && <div style={{marginTop:14}}><IPv4Challenge onSuccess={reward}/></div>}
+      {tab==='split' && <div style={{marginTop:14}}><CidrSplit/></div>}
+
+      
+    </div>
+  );
+}
+
+/** ========== Landing (DE) ========== */
+function Landing({onStart}:{onStart:()=>void}){
+  return (
+    <div className="container">
+      <div className="hero">
+        <div className="brand-kicker">infinite-aperture</div>
+        <h1>Spielerische Netzwerkwelt, klare UX.</h1>
+        <p>
+          Kleine, interaktive Tools zum Lernen — leicht zu benutzen, schön anzusehen.
+          Starte mit dem Binary & Subnet Trainer. Weitere Mini-Projekte folgen.
+        </p>
+        <div className="cta-row">
+          <button className="btn ok" onClick={onStart}>🚀 Trainer starten</button>
+          <a className="btn ghost" href="https://github.com/infinite-aperture/binary" target="_blank" rel="noreferrer">⭐ GitHub-Repo</a>
+        </div>
+      </div>
+
+      <div className="projects">
+        <a className="p-card" onClick={onStart} role="button" aria-label="Binary & Subnet Trainer öffnen">
+          <div className="blur-accent accent-blue"></div>
+          <div className="p-eyebrow">Jetzt verfügbar</div>
+          <div className="p-title">Binary & Subnet Trainer</div>
+          <div className="p-desc">Bits, CIDR & Subnetting — lernen durch Ausprobieren. XP-System, Challenges & Übungen.</div>
+          <div className="p-footer"><span className="badge">React + Vite</span><span className="badge">IPv4</span></div>
+        </a>
+
+        <div className="p-card">
+          <div className="blur-accent accent-green"></div>
+          <div className="p-eyebrow">Bald</div>
+          <div className="p-title">IPv6 Lab</div>
+          <div className="p-desc">Expandieren/Komprimieren, Präfix-Mathe, SLAAC/EUI-64-Generator.</div>
+          <div className="p-footer"><span className="badge">IPv6</span><span className="badge">Lernen</span></div>
+        </div>
+
+        <div className="p-card">
+          <div className="p-eyebrow">In Entwicklung</div>
+          <div className="p-title">Network Calculator</div>
+          <div className="p-desc">Erweiterte Netzwerk-Tools: VLAN-Rechner, Routing-Tabellen, Bandbreiten-Analyse und mehr.</div>
+          <div className="p-footer"><span className="badge">Networking</span><span className="badge">Tools</span></div>
+        </div>
+      </div>
+
+      <div style={{marginTop:28, textAlign:"center"}} className="muted">
+        Tipp: Drücke <span className="mono">T</span>, um direkt in den Trainer zu springen.
+      </div>
+    </div>
+  );
+}
+
+/** ========== Root App mit View-Switch & Deep-Link (#trainer) ========== */
+export default function App(){
+  const [view, setView] = useState<"home"|"trainer">("home");
+
+  // Deep link: #trainer
+  useEffect(()=>{
+    const apply = () => setView((window.location.hash.replace("#","").toLowerCase()==="trainer") ? "trainer" : "home");
+    apply();
+    const onHash = () => apply();
+    window.addEventListener("hashchange", onHash);
+    return ()=> window.removeEventListener("hashchange", onHash);
+  }, []);
+
+  // Keyboard: T -> Trainer
+  useEffect(()=>{
+    const onKey = (e:KeyboardEvent)=>{
+      if (e.key.toLowerCase()==="t") navigate("trainer");
+    };
+    window.addEventListener("keydown", onKey);
+    return ()=> window.removeEventListener("keydown", onKey);
+  }, []);
+
+  function navigate(v:"home"|"trainer"){
+    setView(v);
+    const targetHash = v==="trainer" ? "#trainer" : "#";
+    if (window.location.hash !== targetHash) history.pushState(null, "", targetHash);
+    window.scrollTo({top:0, behavior:"smooth"});
+  }
+
+  return (
     <div>
       <Styles/>
       <div className="glow"></div>
-      <div className="container">
-        <div className="header">
-          <h1>Binary & Subnet Trainer</h1>
-          <div className="muted">Spielerisch Bits, CIDR und Subnetting lernen – perfekt für IHK/AP1.</div>
-        </div>
-
-        <div className="row" style={{marginBottom:12}}>
-          <span className="badge">Lvl <span className="mono">{level}</span></span>
-          <div style={{width:260}}><Progress value={progress}/></div>
-          <span className="muted mono">{xp}/{levelCap} XP</span>
-          <div className="spacer"/>
-          <button className={`btn ${running? 'err':'ok'}`} onClick={()=>setRunning(r=>!r)}>{running? 'Stopp':'Timer'}</button>
-          <button className="btn ghost" onClick={resetTimer}>Reset</button>
-          <span className="badge mono">{Math.floor(timer/60)}:{String(timer%60).padStart(2,'0')}</span>
-          <button className="btn ghost" title="Sound an/aus" onClick={()=>setSound(s=>!s)}>{sound? '🔊':'🔈'}</button>
-        </div>
-
-        <div className="tabs" role="tablist" aria-label="Trainer Tabs">
-          <button className={`tab ${tab==='flip'?'active':''}`} onClick={()=>setTab('flip')}>Bit‑Flipper</button>
-          <button className={`tab ${tab==='mask'?'active':''}`} onClick={()=>setTab('mask')}>Maske</button>
-          <button className={`tab ${tab==='challenge'?'active':''}`} onClick={()=>setTab('challenge')}>IPv4 Challenge</button>
-          <button className={`tab ${tab==='split'?'active':''}`} onClick={()=>setTab('split')}>CIDR‑Split</button>
-        </div>
-
-        {tab==='flip' && <div style={{marginTop:14}}><BitFlipper onSuccess={reward}/></div>}
-        {tab==='mask' && <div style={{marginTop:14}}><SubnetMaskBuilder/></div>}
-        {tab==='challenge' && <div style={{marginTop:14}}><IPv4Challenge onSuccess={reward}/></div>}
-        {tab==='split' && <div style={{marginTop:14}}><CidrSplit/></div>}
-
-        <div className="muted" style={{marginTop:16}}>
-          Nächste Schritte: IPv6‑Quests (Präfixe, Hextets, SLAAC), Prüfungsmodus mit 10‑Min.-Timer & Export.
-        </div>
-      </div>
+      {view==="home" ? <Landing onStart={()=>navigate("trainer")}/> : <TrainerApp/>}
     </div>
   );
 }
