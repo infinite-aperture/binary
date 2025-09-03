@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist",
+    "deploy": "gh-pages -d dist -r git@github.com:infinite-aperture/binary.git",
     "postbuild": "cp dist/index.html dist/404.html || echo 'skip 404 copy'"
   },
   "dependencies": {
@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.33.0",
+    "@types/canvas-confetti": "^1.9.0",
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",
     "@vitejs/plugin-react": "^5.0.0",
