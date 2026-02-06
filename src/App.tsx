@@ -598,89 +598,20 @@ function TrainerApp(){
   );
 }
 
-/** ========== Landing (DE) ========== */
-function Landing({onStart}:{onStart:()=>void}){
-  return (
-    <div className="container">
-      <div className="hero">
-        <div className="brand-kicker">infinite-aperture</div>
-        <h1>Spielerische Netzwerkwelt, klare UX.</h1>
-        <p>
-          Kleine, interaktive Tools zum Lernen — leicht zu benutzen, schön anzusehen.
-          Starte mit dem Binary & Subnet Trainer. Weitere Mini-Projekte folgen.
-        </p>
-        <div className="cta-row">
-          <button className="btn ok" onClick={onStart}>🚀 Trainer starten</button>
-          <a className="btn ghost" href="https://github.com/infinite-aperture/binary" target="_blank" rel="noreferrer">⭐ GitHub-Repo</a>
-        </div>
-      </div>
-
-      <div className="projects">
-        <a className="p-card" onClick={onStart} role="button" aria-label="Binary & Subnet Trainer öffnen">
-          <div className="blur-accent accent-blue"></div>
-          <div className="p-eyebrow">Jetzt verfügbar</div>
-          <div className="p-title">Binary & Subnet Trainer</div>
-          <div className="p-desc">Bits, CIDR & Subnetting — lernen durch Ausprobieren. XP-System, Challenges & Übungen.</div>
-          <div className="p-footer"><span className="badge">React + Vite</span><span className="badge">IPv4</span></div>
-        </a>
-
-        <div className="p-card">
-          <div className="blur-accent accent-green"></div>
-          <div className="p-eyebrow">Bald</div>
-          <div className="p-title">IPv6 Lab</div>
-          <div className="p-desc">Expandieren/Komprimieren, Präfix-Mathe, SLAAC/EUI-64-Generator.</div>
-          <div className="p-footer"><span className="badge">IPv6</span><span className="badge">Lernen</span></div>
-        </div>
-
-        <div className="p-card">
-          <div className="p-eyebrow">In Entwicklung</div>
-          <div className="p-title">Network Calculator</div>
-          <div className="p-desc">Erweiterte Netzwerk-Tools: VLAN-Rechner, Routing-Tabellen, Bandbreiten-Analyse und mehr.</div>
-          <div className="p-footer"><span className="badge">Networking</span><span className="badge">Tools</span></div>
-        </div>
-      </div>
-
-      <div style={{marginTop:28, textAlign:"center"}} className="muted">
-        Tipp: Drücke <span className="mono">T</span>, um direkt in den Trainer zu springen.
-      </div>
-    </div>
-  );
-}
-
-/** ========== Root App mit View-Switch & Deep-Link (#trainer) ========== */
+/** ========== Root App (#trainer default) ========== */
 export default function App(){
-  const [view, setView] = useState<"home"|"trainer">("home");
-
-  // Deep link: #trainer
+  // Ensure the hash deep-link always points at the trainer view for direct loads and refreshes.
   useEffect(()=>{
-    const apply = () => setView((window.location.hash.replace("#","").toLowerCase()==="trainer") ? "trainer" : "home");
-    apply();
-    const onHash = () => apply();
-    window.addEventListener("hashchange", onHash);
-    return ()=> window.removeEventListener("hashchange", onHash);
+    if (window.location.hash !== "#trainer"){
+      history.replaceState(null, "", "#trainer");
+    }
   }, []);
-
-  // Keyboard: T -> Trainer
-  useEffect(()=>{
-    const onKey = (e:KeyboardEvent)=>{
-      if (e.key.toLowerCase()==="t") navigate("trainer");
-    };
-    window.addEventListener("keydown", onKey);
-    return ()=> window.removeEventListener("keydown", onKey);
-  }, []);
-
-  function navigate(v:"home"|"trainer"){
-    setView(v);
-    const targetHash = v==="trainer" ? "#trainer" : "#";
-    if (window.location.hash !== targetHash) history.pushState(null, "", targetHash);
-    window.scrollTo({top:0, behavior:"smooth"});
-  }
 
   return (
     <div>
       <Styles/>
       <div className="glow"></div>
-      {view==="home" ? <Landing onStart={()=>navigate("trainer")}/> : <TrainerApp/>}
+      <TrainerApp/>
     </div>
   );
 }
